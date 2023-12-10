@@ -18,21 +18,21 @@ def main():
         data = get_info_company(i)
         data_company.append(data)
 
-    create_database('headhunterparser', params)
-    create_table('headhunterparser', params)
-    save_date_to_table(data_company, 'headhunterparser', params)
-
+    # create_database('headhunterparser', params)
+    # create_table('headhunterparser', params)
+    # save_date_to_table(data_company, 'headhunterparser', params)
+    #
     ff = DBManager('headhunterparser')
     print(ff.get_companies_and_vacancies_count())
 
 
-    # for i in get_info_vacancy('https://api.hh.ru/vacancies?employer_id=2104700')['items']:
+    # for i in get_info_vacancy('https://api.hh.ru/vacancies?employer_id=2104700'):
     #     print(i)
     #     print('*' * 100)
 
     # print(get_info_vacancy('https://api.hh.ru/vacancies?employer_id=1740'))
 
-    # print(h('https://api.hh.ru/vacancies?employer_id=1740'))
+    # print(h('https://api.hh.ru/vacancies?employer_id=1221656')['items'][0])
     # for i in h('https://api.hh.ru/vacancies?employer_id=1740')['items']:
     #     print(i)
     #     print(' ')
@@ -44,7 +44,7 @@ def main():
     #     print(' ')
     #     print('*' * 100)
     #     print(' ')
-    # print(get_info_company('1740'))
+    # print(get_info_company('1221656'))
     # for i in get_info_company('1740'):
     #     print(i)
     #     print('*' * 100)

@@ -38,7 +38,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
         if i['salary'] is None:
             vacancy_dict = {
                 'vacancy_id': i['id'],
-                # 'company_name': i['department']['name'],
+                'company_name': i['employer']['name'],
                 'vacancy_name': i['name'],
                 'salary': 0,
                 'area': i['area']['name']
@@ -49,7 +49,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
             if i['salary']['from'] is None:
                 vacancy_dict = {
                     'vacancy_id': i['id'],
-                    # 'company_name': i['department']['name'],
+                    'company_name': i['employer']['name'],
                     'vacancy_name': i['name'],
                     'salary': 0,
                     'area': i['area']['name']
@@ -60,7 +60,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
                 if i['salary']['currency'] == 'RUR':
                     vacancy_dict = {
                         'vacancy_id': i['id'],
-                        # 'company_name': i['department']['name'],
+                        'company_name': i['employer']['name'],
                         'vacancy_name': i['name'],
                         'salary': i['salary']['from'],
                         'area': i['area']['name']
@@ -100,6 +100,7 @@ def create_table(database_name: str, params) -> None:
         CREATE TABLE vacancies (
         vacancy_id serial PRIMARY KEY,
         company_id int REFERENCES company(company_id),
+        company_name varchar(100) NOT NULL,
         vacancy_name varchar(100),
         salary int,
         area varchar(100)
@@ -129,10 +130,10 @@ def save_date_to_table(data_company: list[dict[str, Any]], database_name: str,
 
             for i in list_vacancies_dict:
                 cur.execute("""
-                                        INSERT INTO vacancies (company_id, vacancy_name, salary, area)
-                                        VALUES (%s, %s, %s, %s)
+                                        INSERT INTO vacancies (company_id, company_name, vacancy_name, salary, area)
+                                        VALUES (%s, %s, %s, %s, %s)
                                         """,
-                            (company_id, i['vacancy_name'], i['salary'], i['area']))
+                            (company_id,i['company_name'], i['vacancy_name'], i['salary'], i['area']))
 
     conn.commit()
     conn.close()

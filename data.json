@@ -1,0 +1,91 @@
+{
+  'id': '90092990',
+  'premium': False,
+  'name': 'Электромонтажник судовой (судостроительные заводы)',
+  'department': None,
+  'has_test': False,
+  'response_letter_required': False,
+  'area': {
+    'id': '2',
+    'name': 'Санкт-Петербург',
+    'url': 'https://api.hh.ru/areas/2'
+  },
+  'salary': {
+    'from': 75000,
+    'to': 100000,
+    'currency': 'RUR',
+    'gross': True
+  },
+  'type': {
+    'id': 'open',
+    'name': 'Открытая'
+  },
+  'address': {
+    'city': 'Санкт-Петербург',
+    'street': 'Косая линия',
+    'building': '16',
+    'lat': 59.927621,
+    'lng': 30.258232,
+    'description': None,
+    'raw': 'Санкт-Петербург, Косая линия, 16',
+    'metro': None,
+    'metro_stations': [],
+    'id': '6012993'
+  },
+  'response_url': None,
+  'sort_point_distance': None,
+  'published_at': '2023-12-08T13:36:07+0300',
+  'created_at': '2023-12-08T13:36:07+0300',
+  'archived': False,
+  'apply_alternate_url': 'https://hh.ru/applicant/vacancy_response?vacancyId=90092990',
+  'show_logo_in_search': None,
+  'insider_interview': None,
+  'url': 'https://api.hh.ru/vacancies/90092990?host=hh.ru',
+  'alternate_url': 'https://hh.ru/vacancy/90092990',
+  'relations': [],
+  'employer': {
+    'id': '1221656',
+    'name': 'Невское электро-монтажное общество',
+    'url': 'https://api.hh.ru/employers/1221656',
+    'alternate_url': 'https://hh.ru/employer/1221656',
+    'logo_urls': {
+      'original': 'https://hhcdn.ru/employer-logo-original/1057810.jpg',
+      '90': 'https://hhcdn.ru/employer-logo/5851881.jpeg',
+      '240': 'https://hhcdn.ru/employer-logo/5851882.jpeg'
+    },
+    'vacancies_url': 'https://api.hh.ru/vacancies?employer_id=1221656',
+    'accredited_it_employer': False,
+    'trusted': True
+  },
+  'snippet': {
+    'requirement': 'Опыт работы в судостроении от 1 года. Образование: cреднее-специальное и наличие удостоверения (диплома) сварщика, слесаря-монтажника. Желательно навыки ручной...',
+    'responsibility': 'Выполнение внутреннего монтажа оборудования. Прокладка местных и магистральных кабелей с соблюдением всех технологических требований. Работа с технологической документацией. Распайка разъемов.'
+  },
+  'contacts': None,
+  'schedule': {
+    'id': 'fullDay',
+    'name': 'Полный день'
+  },
+  'working_days': [],
+  'working_time_intervals': [],
+  'working_time_modes': [],
+  'accept_temporary': False,
+  'professional_roles': [
+    {
+      'id': '109',
+      'name': 'Сварщик'
+    }
+  ],
+  'accept_incomplete_resumes': True,
+  'experience': {
+    'id': 'between1And3',
+    'name': 'От 1 года до 3 лет'
+  },
+  'employment': {
+    'id': 'full',
+    'name': 'Полная занятость'
+  },
+  'adv_response_url': None,
+  'is_adv_vacancy': False,
+  'adv_context': None
+}
