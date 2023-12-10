@@ -8,7 +8,6 @@ class DBManager:
         self.db_name = db_name
 
     def get_companies_and_vacancies_count(self):
-
         params = config()
         conn = psycopg2.connect(dbname=self.db_name, **params)
 
@@ -17,27 +16,59 @@ class DBManager:
             SELECT * FROM company
             """)
             list_company = []
+            list_vacancies = []
             rows = cur.fetchall()
-            # print(type(rows))
             for row in rows:
                 list_company.append(row)
 
-            cur.execute("""
-            SELECT COUNT(*) FROM vacancies
-            WHERE company_id = 2
-            """)
-            rows_ = cur.fetchall()
-            # count_1 = 0
-            # count_2 = 0
-            # for row in rows_:
-            #     if row[1] == 1:
-            #         count_1 += 1
-            #     else:
-            #         count_2 += 1
+            for i in range(len(list_company)):
+                cur.execute(f"""
+                SELECT COUNT(*) FROM vacancies
+                WHERE company_id = {i + 1}
+                """)
+                rows_1 = cur.fetchall()
+                list_vacancies.append(rows_1)
+
+            # cur.execute("""
+            #             SELECT COUNT(*) FROM vacancies
+            #             WHERE company_id = 2
+            #             """)
+            # rows_2 = cur.fetchall()
 
         conn.commit()
         conn.close()
+        # print(list_vacancies)
+        info_dict = {list_company[0][1]: list_vacancies[0][0][0], list_company[1][1]: list_vacancies[1][0][0],
+                     list_company[2][1]: list_vacancies[2][0][0]}
 
-        # print(f'{list_company[0][1]} имеет вакансий {count_1}')
-        # print(f'{list_company[1][1]} имеет вакансий {count_2}')
-        print(rows_[0][0])
+        return info_dict
+
+    # def get_all_vacancies(self):
+    #     params = config()
+    #     conn = psycopg2.connect(dbname=self.db_name, **params)
+    #
+    #     with conn.cursor() as cur:
+    #         cur.execute("""
+    #         SELECT * FROM company
+    #         """)
+    #         list_company = []
+    #         rows = cur.fetchall()
+    #         for row in rows:
+    #             list_company.append(row)
+    #
+    #         cur.execute("""
+    #         SELECT * FROM vacancies
+    #         WHERE company_id = 1
+    #         """)
+    #         rows_1 = cur.fetchall()
+    #
+    #         cur.execute("""
+    #                     SELECT * FROM vacancies
+    #                     WHERE company_id = 2
+    #                     """)
+    #         rows_2 = cur.fetchall()
+    #
+    #     conn.commit()
+    #     conn.close()
+
+        # info_list =

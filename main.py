@@ -3,8 +3,9 @@ from config import config
 from dbmanager import DBManager
 
 company_id = [
-    1413874,  # Булочные Ф. Вольчека
-    1221656,  # НЭМО
+    1740,  # Булочные Ф. Вольчека
+    1221656,
+    1040211# НЭМО
 ]
 
 
@@ -22,7 +23,7 @@ def main():
     save_date_to_table(data_company, 'headhunterparser', params)
 
     ff = DBManager('headhunterparser')
-    ff.get_companies_and_vacancies_count()
+    print(ff.get_companies_and_vacancies_count())
 
 
     # for i in get_info_vacancy('https://api.hh.ru/vacancies?employer_id=2104700')['items']:
