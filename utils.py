@@ -86,7 +86,7 @@ def create_table(database_name: str, params) -> None:
 
     with conn.cursor() as cur:
         cur.execute("""
-        CREATE TABLE company (
+        CREATE TABLE companies (
         company_id serial PRIMARY KEY,
         company_name varchar(100) NOT NULL,
         company_id_to_hh int,
@@ -99,7 +99,7 @@ def create_table(database_name: str, params) -> None:
         cur.execute("""
         CREATE TABLE vacancies (
         vacancy_id serial PRIMARY KEY,
-        company_id int REFERENCES company(company_id),
+        company_id int REFERENCES companies(company_id),
         company_name varchar(100) NOT NULL,
         vacancy_name varchar(100),
         salary int,
@@ -118,7 +118,7 @@ def save_date_to_table(data_company: list[dict[str, Any]], database_name: str,
     with conn.cursor() as cur:
         for i in data_company:
             cur.execute("""
-            INSERT INTO company (company_name, company_id_to_hh, company_URL, vacancies_url)
+            INSERT INTO companies (company_name, company_id_to_hh, company_URL, vacancies_url)
             VALUES (%s, %s, %s, %s)
             RETURNING company_id
             """,
