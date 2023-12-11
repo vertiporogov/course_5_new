@@ -14,9 +14,9 @@ def main():
 
     data_company = []
 
-    for i in company_id:
-        data = get_info_company(i)
-        data_company.append(data)
+    # for i in company_id:
+    #     data = get_info_company(i)
+    #     data_company.append(data)
 
     # create_database('headhunterparser', params)
     # create_table('headhunterparser', params)
@@ -24,6 +24,8 @@ def main():
     #
     ff = DBManager('headhunterparser')
     print(ff.get_companies_and_vacancies_count())
+    print(ff.get_all_vacancies())
+    print(ff.get_avg_salary(2))
 
 
     # for i in get_info_vacancy('https://api.hh.ru/vacancies?employer_id=2104700'):

@@ -40,6 +40,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
                 'vacancy_id': i['id'],
                 'company_name': i['employer']['name'],
                 'vacancy_name': i['name'],
+                'vacancy_url': i['employer']['alternate_url'],
                 'salary': 0,
                 'area': i['area']['name']
             }
@@ -51,6 +52,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
                     'vacancy_id': i['id'],
                     'company_name': i['employer']['name'],
                     'vacancy_name': i['name'],
+                    'vacancy_url': i['employer']['alternate_url'],
                     'salary': 0,
                     'area': i['area']['name']
                 }
@@ -62,6 +64,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
                         'vacancy_id': i['id'],
                         'company_name': i['employer']['name'],
                         'vacancy_name': i['name'],
+                        'vacancy_url': i['employer']['alternate_url'],
                         'salary': i['salary']['from'],
                         'area': i['area']['name']
                     }
@@ -102,6 +105,7 @@ def create_table(database_name: str, params) -> None:
         company_id int REFERENCES companies(company_id),
         company_name varchar(100) NOT NULL,
         vacancy_name varchar(100),
+        vacancy_url text,
         salary int,
         area varchar(100)
         )
@@ -130,10 +134,10 @@ def save_date_to_table(data_company: list[dict[str, Any]], database_name: str,
 
             for i in list_vacancies_dict:
                 cur.execute("""
-                                        INSERT INTO vacancies (company_id, company_name, vacancy_name, salary, area)
-                                        VALUES (%s, %s, %s, %s, %s)
+                                        INSERT INTO vacancies (company_id, company_name, vacancy_name, vacancy_url, salary, area)
+                                        VALUES (%s, %s, %s, %s, %s, %s)
                                         """,
-                            (company_id,i['company_name'], i['vacancy_name'], i['salary'], i['area']))
+                            (company_id,i['company_name'], i['vacancy_name'], i['vacancy_url'], i['salary'], i['area']))
 
     conn.commit()
     conn.close()

@@ -42,8 +42,35 @@ class DBManager:
 
         return result
 
-    # def get_all_vacancies(self):
-    #     params = config()
-    #     conn = psycopg2.connect(dbname=self.db_name, **params)
-    #
-    #     with conn.cursor() as cur:
+    def get_all_vacancies(self):
+        params = config()
+        conn = psycopg2.connect(dbname=self.db_name, **params)
+
+        with conn.cursor() as cur:
+            cur.execute("""
+            SELECT vacancy_id, company_name, vacancy_name, salary, vacancy_url FROM vacancies
+            """)
+
+            result = cur.fetchall()
+
+        conn.commit()
+        conn.close()
+
+        return result
+
+    def get_avg_salary(self, company_id):
+        params = config()
+        conn = psycopg2.connect(dbname=self.db_name, **params)
+
+        with conn.cursor() as cur:
+            cur.execute(f"""
+            SELECT avg(salary) FROM vacancies
+            WHERE company_id = {company_id}
+            """)
+
+            result = cur.fetchall()
+
+        conn.commit()
+        conn.close()
+
+        return result
