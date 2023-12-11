@@ -6,6 +6,7 @@ import json
 
 
 def get_info_company(id_company: str) -> dict[str, Any]:
+    """Возвращает данные о канале по id канала"""
     hh_api = f"https://api.hh.ru/employers/{id_company}"
     response = get(hh_api)
     company = json.loads(response.content.decode())
@@ -20,6 +21,7 @@ def get_info_company(id_company: str) -> dict[str, Any]:
 
 
 def h(dd):
+    """Функция хэлпер"""
     hh_api = dd
     response = get(hh_api)
     vacancy = json.loads(response.content.decode())
@@ -27,6 +29,7 @@ def h(dd):
 
 
 def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
+    """Возвращает список словарей с данными о вакансиях"""
     vacancy_list = []
 
     hh_api = vacancy_url
@@ -74,6 +77,7 @@ def get_info_vacancy(vacancy_url: str) -> list[dict[str, Any]]:
 
 
 def create_database(database_name: str, params) -> None:
+    """Создаёт базу данных"""
     conn = psycopg2.connect(dbname='postgres', **params)
     conn.autocommit = True
     cur = conn.cursor()
@@ -85,6 +89,7 @@ def create_database(database_name: str, params) -> None:
 
 
 def create_table(database_name: str, params) -> None:
+    """Создаёт таблицы в базе данных"""
     conn = psycopg2.connect(dbname=database_name, **params)
 
     with conn.cursor() as cur:
@@ -115,8 +120,8 @@ def create_table(database_name: str, params) -> None:
     conn.close()
 
 
-def save_date_to_table(data_company: list[dict[str, Any]], database_name: str,
-                       params) -> None:
+def save_date_to_table(data_company: list[dict[str, Any]], database_name: str, params) -> None:
+    """Заполняет таблицы данными"""
     conn = psycopg2.connect(dbname=database_name, **params)
 
     with conn.cursor() as cur:
@@ -132,12 +137,14 @@ def save_date_to_table(data_company: list[dict[str, Any]], database_name: str,
 
             list_vacancies_dict = get_info_vacancy(i['vacancies_url'])
 
-            for i in list_vacancies_dict:
+            for ii in list_vacancies_dict:
                 cur.execute("""
                                         INSERT INTO vacancies (company_id, company_name, vacancy_name, vacancy_url, salary, area)
                                         VALUES (%s, %s, %s, %s, %s, %s)
                                         """,
-                            (company_id,i['company_name'], i['vacancy_name'], i['vacancy_url'], i['salary'], i['area']))
+                            (
+                                company_id, ii['company_name'], ii['vacancy_name'], ii['vacancy_url'], ii['salary'],
+                                ii['area']))
 
     conn.commit()
     conn.close()
