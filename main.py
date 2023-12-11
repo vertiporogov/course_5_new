@@ -9,6 +9,7 @@ company_id = [
 ]
 
 
+# noinspection PyTypeChecker
 def main():
     params = config()
 

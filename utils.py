@@ -139,7 +139,8 @@ def save_date_to_table(data_company: list[dict[str, Any]], database_name: str, p
 
             for ii in list_vacancies_dict:
                 cur.execute("""
-                                        INSERT INTO vacancies (company_id, company_name, vacancy_name, vacancy_url, salary, area)
+                                        INSERT INTO vacancies (company_id, company_name, vacancy_name, vacancy_url,
+                                         salary, area)
                                         VALUES (%s, %s, %s, %s, %s, %s)
                                         """,
                             (
