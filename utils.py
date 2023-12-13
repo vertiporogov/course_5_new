@@ -82,7 +82,7 @@ def create_database(database_name: str, params) -> None:
     conn.autocommit = True
     cur = conn.cursor()
 
-    cur.execute(f"DROP DATABASE {database_name}")
+    cur.execute(f"DROP DATABASE IF EXISTS {database_name}")
     cur.execute(f"CREATE DATABASE {database_name}")
 
     conn.close()
@@ -139,10 +139,10 @@ def save_date_to_table(data_company: list[dict[str, Any]], database_name: str, p
 
             for ii in list_vacancies_dict:
                 cur.execute("""
-                                        INSERT INTO vacancies (company_id, company_name, vacancy_name, vacancy_url,
-                                         salary, area)
-                                        VALUES (%s, %s, %s, %s, %s, %s)
-                                        """,
+                            INSERT INTO vacancies (company_id, company_name, vacancy_name, vacancy_url,
+                             salary, area)
+                            VALUES (%s, %s, %s, %s, %s, %s)
+                            """,
                             (
                                 company_id, ii['company_name'], ii['vacancy_name'], ii['vacancy_url'], ii['salary'],
                                 ii['area']))

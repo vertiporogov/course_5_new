@@ -5,7 +5,14 @@ from dbmanager import DBManager
 company_id = [
     1740,  # Яндекс
     1221656,  # НЭМО
-    1040211  # elama
+    1040211,  # elama
+    3786259,  # Сто дел
+    800646,   # Интернет
+    2458132,  # STOREEZ
+    4052705,  # 101 GROUP
+    3330607,  # 25 микрон
+    10172475,  # 27flows
+    2924479  # 220 вольт
 ]
 
 
@@ -27,7 +34,7 @@ def main():
     ff = DBManager('headhunterparser')
     print(ff.get_companies_and_vacancies_count())
     print(ff.get_all_vacancies())
-    print(ff.get_avg_salary(2))
+    print(ff.get_avg_salary(3))
     print(ff.get_vacancies_with_higher_salary(2))
     print(ff.get_vacancies_with_keyword('судовой'))
 
